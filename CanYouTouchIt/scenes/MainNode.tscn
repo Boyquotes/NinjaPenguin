@@ -1,0 +1,149 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scripts/MapManager.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://images/penguin.png" type="Texture" id=3]
+[ext_resource path="res://FFFFORWA.TTF" type="DynamicFontData" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 30.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 35
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 360 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 360, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 370 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 359, 10 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 45
+outline_color = Color( 0.776471, 0.0823529, 0.0823529, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 20
+font_data = ExtResource( 4 )
+
+[node name="MainNode" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 370, 550 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( 0.937496, -2.38419e-006 )
+scale = Vector2( 0.606618, 0.576922 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="Launch_button" type="Button" parent="."]
+margin_left = 10.0
+margin_top = 590.0
+margin_right = 710.0
+margin_bottom = 720.0
+custom_fonts/font = SubResource( 2 )
+text = "Play"
+
+[node name="Walls" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="SideWall" type="StaticBody2D" parent="Walls"]
+position = Vector2( 0, -10 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SideWall"]
+position = Vector2( 0, 360 )
+shape = SubResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="Walls/SideWall"]
+margin_left = -10.0
+margin_top = 20.0
+margin_right = 10.0
+margin_bottom = 730.0
+color = Color( 0, 0.501961, 0.831373, 1 )
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
+position = Vector2( 170, 730 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+position = Vector2( 200, -140 )
+shape = SubResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="Walls/BottomWall"]
+margin_left = -160.0
+margin_top = -150.0
+margin_right = 550.0
+margin_bottom = -130.0
+color = Color( 0, 0.501961, 0.831373, 1 )
+
+[node name="SideWall2" type="StaticBody2D" parent="Walls"]
+position = Vector2( 720, 360 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SideWall2"]
+shape = SubResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="Walls/SideWall2"]
+margin_left = -10.0
+margin_top = -360.0
+margin_right = 10.0
+margin_bottom = 360.0
+color = Color( 0, 0.501961, 0.831373, 1 )
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+position = Vector2( 170, 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+position = Vector2( 190, 0 )
+shape = SubResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="Walls/TopWall"]
+margin_left = -180.0
+margin_top = -10.0
+margin_right = 560.0
+margin_bottom = 30.0
+color = Color( 0, 0.501961, 0.831373, 1 )
+
+[node name="Lose_message" type="Label" parent="."]
+visible = false
+margin_left = 30.0
+margin_top = 620.0
+margin_right = 290.0
+margin_bottom = 683.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.745098, 0.0705882, 0.0705882, 1 )
+text = "You lose!"
+
+[node name="Wave" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 104.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 8 )
+text = "Wave: 1"
+[connection signal="button_down" from="Launch_button" to="Player" method="_on_Launch_button_button_down"]

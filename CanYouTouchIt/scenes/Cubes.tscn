@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/Cube.gd" type="Script" id=1]
+[ext_resource path="res://images/bird.png" type="Texture" id=2]
+[ext_resource path="res://FFFFORWA.TTF" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 35
+font_data = ExtResource( 3 )
+
+[node name="Cubes" type="Node2D"]
+
+[node name="Cube" type="RigidBody2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+mode = 1
+gravity_scale = 0.0
+contacts_reported = 10
+sleeping = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Background" type="ColorRect" parent="Cube"]
+visible = false
+margin_right = 140.0
+margin_bottom = 140.0
+color = Color( 0.239216, 0.768627, 0, 1 )
+
+[node name="Left_Side" type="ColorRect" parent="Cube"]
+visible = false
+margin_right = 10.0
+margin_bottom = 140.0
+color = Color( 0.913725, 0.576471, 0.0980392, 1 )
+
+[node name="Top_Side" type="ColorRect" parent="Cube"]
+visible = false
+margin_left = 10.0
+margin_right = 130.0
+margin_bottom = 10.0
+color = Color( 0.913725, 0.576471, 0.0980392, 1 )
+
+[node name="Bottom_Side" type="ColorRect" parent="Cube"]
+visible = false
+margin_left = 10.0
+margin_top = 130.0
+margin_right = 130.0
+margin_bottom = 140.0
+color = Color( 0.913725, 0.576471, 0.0980392, 1 )
+
+[node name="Right_Side" type="ColorRect" parent="Cube"]
+visible = false
+margin_left = 130.0
+margin_right = 140.0
+margin_bottom = 140.0
+color = Color( 0.913725, 0.576471, 0.0980392, 1 )
+
+[node name="Sprite" type="Sprite" parent="Cube"]
+position = Vector2( 70, 70 )
+scale = Vector2( 0.958904, 0.958904 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Cube"]
+margin_left = 60.0
+margin_top = 20.0
+margin_right = 104.0
+margin_bottom = 69.0
+custom_fonts/font = SubResource( 2 )
+text = "1"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Cube"]
+polygon = PoolVector2Array( 20, 0, 0, 20, 0, 40, 0, 60, 20, 80, 40, 80, 40, 100, 40, 120, 60, 140, 80, 140, 100, 120, 100, 100, 100, 80, 120, 80, 140, 60, 140, 40, 140, 20, 120, 0, 120, 20, 100, 20, 80, 0, 60, 0, 40, 20, 20, 20 )
